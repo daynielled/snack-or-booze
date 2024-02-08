@@ -2,25 +2,25 @@ import React from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
-function FoodItem({ items, cantFind }) {
+function DrinkItem({ items, cantFind }) {
   const { id } = useParams();
 
-  let food = items.find(item => item.id === id);
-  if (!food) return <Redirect to={cantFind} />;
+  let drink = items.find(drink => drink.id === id);
+  if (!drink) return <Redirect to={cantFind} />;
 
   return (
     <section>
       <Card>
         <CardBody>
           <CardTitle className="font-weight-bold text-center">
-            {food.name}
+            {drink.name}
           </CardTitle>
-          <CardText className="font-italic">{food.description}</CardText>
+          <CardText className="font-italic">{drink.description}</CardText>
           <p>
-            <b>Recipe:</b> {food.recipe}
+            <b>Recipe:</b> {drink.recipe}
           </p>
           <p>
-            <b>Serve:</b> {food.serve}
+            <b>Serve:</b> {drink.serve}
           </p>
         </CardBody>
       </Card>
@@ -28,6 +28,4 @@ function FoodItem({ items, cantFind }) {
   );
 }
 
-export default FoodItem;
-
-
+export default DrinkItem;

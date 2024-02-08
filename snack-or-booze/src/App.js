@@ -5,32 +5,30 @@ import Home from "./Home";
 import SnackOrBoozeApi from "./Api";
 import NavBar from "./NavBar";
 import { Route, Switch } from "react-router-dom";
-import Menu from "./FoodMenu";
-import Snack from "./FoodItem";
+import FoodMenu from "./FoodMenu";
+import FoodItem from "./FoodItem";
+import DrinkItem from "./DrinkItem"; 
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [snacks, setSnacks] = useState([]);
-  const [drinks, setDrinks] = useState([]);
-
+  const [drinks, setDrinks] = useState([]); 
 
   useEffect(() => {
     async function fetchData() {
-      try{
-        let snacks = await SnackOrBoozeApi.getSnacks();
-        let drinks = await SnackOrBoozeApi.getDrinks()
-        setSnacks(snacks);
-        setDrinks(drinks);
+      try {
+        const snacksData = await SnackOrBoozeApi.getSnacks();
+        const drinksData = await SnackOrBoozeApi.getDrinks(); 
+        setSnacks(snacksData);
+        setDrinks(drinksData); 
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setIsLoading(false)
+        setIsLoading(false);
       }
-      
     }
     fetchData();
   }, []);
-
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -43,19 +41,19 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <Home snacks={snacks} drinks={drinks} />
+              <Home snacks={snacks} drinks={drinks} /> {/* Pass drinks state to Home component */}
             </Route>
             <Route exact path="/snacks">
-              <Menu snacks={snacks} title="Snacks" />
+              <FoodMenu items={snacks} type="snacks" />
             </Route>
             <Route exact path="/drinks">
-              <Menu snacks={drinks} title="Drinks" />
+              <FoodMenu items={drinks} type="drinks" /> {/* Render drinks using FoodMenu */}
             </Route>
             <Route path="/snacks/:id">
-              <Snack items={snacks} cantFind="/snacks" />
+              <FoodItem items={snacks} cantFind="/snacks" />
             </Route>
             <Route path="/drinks/:id">
-              <Snack items={drinks} cantFind="/drinks" />
+              <DrinkItem items={drinks} cantFind="/drinks" /> {/* Use DrinkItem component */}
             </Route>
             <Route>
               <p>Hmmm. I can't seem to find what you want.</p>
