@@ -18,6 +18,9 @@ function NavBar() {
           <NavItem>
             <NavLink to="/drinks">Booze</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to="/add-food">Add Snack or Booze</NavLink>
+          </NavItem>
         </Nav>
       </Navbar>
     </div>

@@ -21,6 +21,14 @@ class SnackOrBoozeApi {
     return result.data;
   }
 
+  static async addFood(foodData) {
+    try {
+      const result = await axios.post(`${BASE_API_URL}`, foodData)
+      return result.data;
+    } catch (error) {
+      throw Error("Error adding food:", error)
+    }
+  } 
 
 }
 

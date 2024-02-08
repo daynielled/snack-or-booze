@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import FoodMenu from "./FoodMenu";
 import FoodItem from "./FoodItem";
 import DrinkItem from "./DrinkItem"; 
+import AddFoodForm from "./AddFoodForm";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -54,6 +55,9 @@ function App() {
             </Route>
             <Route path="/drinks/:id">
               <DrinkItem items={drinks} cantFind="/drinks" /> {/* Use DrinkItem component */}
+            </Route>
+            <Route path="/add-food">
+              <AddFoodForm />
             </Route>
             <Route>
               <p>Hmmm. I can't seem to find what you want.</p>
