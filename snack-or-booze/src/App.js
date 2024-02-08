@@ -11,15 +11,26 @@ import Snack from "./FoodItem";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [snacks, setSnacks] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+
 
   useEffect(() => {
-    async function getSnacks() {
-      let snacks = await SnackOrBoozeApi.getSnacks();
-      setSnacks(snacks);
-      setIsLoading(false);
+    async function fetchData() {
+      try{
+        let snacks = await SnackOrBoozeApi.getSnacks();
+        let drinks = await SnackOrBoozeApi.getDrinks()
+        setSnacks(snacks);
+        setDrinks(drinks);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsLoading(false)
+      }
+      
     }
-    getSnacks();
+    fetchData();
   }, []);
+
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -32,13 +43,19 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <Home snacks={snacks} />
+              <Home snacks={snacks} drinks={drinks} />
             </Route>
             <Route exact path="/snacks">
               <Menu snacks={snacks} title="Snacks" />
             </Route>
+            <Route exact path="/drinks">
+              <Menu snacks={drinks} title="Drinks" />
+            </Route>
             <Route path="/snacks/:id">
               <Snack items={snacks} cantFind="/snacks" />
+            </Route>
+            <Route path="/drinks/:id">
+              <Snack items={drinks} cantFind="/drinks" />
             </Route>
             <Route>
               <p>Hmmm. I can't seem to find what you want.</p>
