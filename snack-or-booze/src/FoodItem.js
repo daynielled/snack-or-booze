@@ -2,10 +2,21 @@ import React from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
+
+
+/**
+ * Component representing a specific snack/food item
+ * @param {Array} items - Array of snack items
+ * @param {string} cantFind - Path to redirect if the snack item is not found
+ * @returns {JSX.Element}- FoodItem component
+ */
 function FoodItem({ items, cantFind }) {
   const { id } = useParams();
 
+  //Find the snack item by its ID
   let food = items.find(item => item.id === id);
+
+   //If the snack item is not found, redirect to the specified path
   if (!food) return <Redirect to={cantFind} />;
 
   return (

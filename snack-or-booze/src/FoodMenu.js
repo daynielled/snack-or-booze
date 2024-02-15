@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./FoodMenu.css";
 import {
+  Button,
   Card,
   CardBody,
   CardTitle,
@@ -10,7 +11,32 @@ import {
   ListGroupItem
 } from "reactstrap";
 
+
+/**
+ * Component representing a menu of either snacks or drinks.
+ * @param {Array} items - Array of snack or drink items
+ * @param {string} type - Type of items ('snacks' or 'drinks').
+ * @returns {JSX.Element}- FoodMenu component
+ */
 function FoodMenu({ items, type }) {
+  const history = useHistory();
+
+/**
+ * Handles click event on the "Add Snack" or "Add Drink" button.
+ * Redirects the user to the appropriate add food page based on the type
+ */
+  const handleAddButtonClick = () => {
+    if (type === "snacks") {
+      // Redirect to add snack page
+      history.push("/add-food/snacks");
+    } else if (type === "drinks") {
+      // Redirect to add drink page
+      history.push("/add-food/drinks");
+    }
+  };
+
+  console.log("Items recieved in FoodMenu:", items);
+
   return (
     <section className="col-md-4">
       <Card>
@@ -30,6 +56,7 @@ function FoodMenu({ items, type }) {
               </Link>
             ))}
           </ListGroup>
+          <Button onClick={handleAddButtonClick}>Add {type === "snacks" ? "Snack" : "Drink"}</Button>
         </CardBody>
       </Card>
     </section>

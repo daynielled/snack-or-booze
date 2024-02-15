@@ -1,15 +1,19 @@
 import React from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 
+/**
+ * Component representing the home page of the application.
+ * @returns {JSX.Element} - Home component.
+ */
 function Home() {
   return (
     <section className="col-md-8">
       <Card>
         <CardBody className="text-center">
           <CardTitle>
-            <h3 className="font-weight-bold">
+            <p className="font-weight-bold">
               Welcome to Silicon Valley's premier dive cafe!
-            </h3>
+            </p>
           </CardTitle>
         </CardBody>
       </Card>

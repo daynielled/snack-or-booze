@@ -5,8 +5,8 @@
 }
 
 .form-card {
-  background-color: #101010d1;
-  color: black; /* Change text color to black */
+ 
+  
   border: 20px solid rgba(16, 16, 16, 0.63);
   box-shadow: inset 0 0 0 2px #ffffff;
   box-sizing: border-box;
@@ -18,7 +18,7 @@
 }
 
 .form-label {
-  color: black; /* Change label color to black */
+  color: black; 
 }
 
 .form-input {
@@ -27,7 +27,7 @@
   border: 2px solid #ffffff;
   border-radius: 5px;
   background-color: transparent;
-  color: black; /* Change input text color to black */
+ 
 }
 
 .form-input:focus {

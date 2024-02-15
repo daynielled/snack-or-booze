@@ -3,6 +3,11 @@ import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 
+
+/**
+ * Component representing the navigation bar of the application.
+ * @returns {JSX.Element} - NavBar component.
+ */
 function NavBar() {
   return (
     <div>
@@ -17,9 +22,6 @@ function NavBar() {
           </NavItem>
           <NavItem>
             <NavLink to="/drinks">Booze</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/add-food">Add Snack or Booze</NavLink>
           </NavItem>
         </Nav>
       </Navbar>

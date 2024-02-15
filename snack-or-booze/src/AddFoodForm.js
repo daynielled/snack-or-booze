@@ -4,10 +4,15 @@ import "./AddFoodForm.css";
 import SnackOrBoozeApi from "./Api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-function AddFoodForm(type) {
+
+/**Functional component for adding food items.
+ * @param {string} type - Type of food item(eg."snacks" or "drinks")
+ * @returns {JSX.Element} - Add Food Form component
+ */
+function AddFoodForm({type, onAddSnack, onAddDrink}) {
     const history = useHistory();
     const [foodData, setFoodData] = useState({
-        type: "Food",
+        type: type,
         name: "",
         description: "",
         recipe: "",
@@ -16,7 +21,9 @@ function AddFoodForm(type) {
 
     const [message, setMessage]= useState("");
 
-    //Update food item when input fields change
+    /**Handles change in the input fields and updates the food data state
+     * @param {Object} e -Event object
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFoodData((prevData) => ({
@@ -25,16 +32,32 @@ function AddFoodForm(type) {
         }));
     };
 
+    /**
+     * Submits the form data to add a new food item.
+     * @param {Object} e -Event object
+     */
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            //API call to add new snack or drink item
-            await SnackOrBoozeApi.addFood(foodData);
+          console.log("Submitting form data", foodData)
+            if (type === "snacks") {
+              await SnackOrBoozeApi.addSnack(foodData);
+              onAddSnack(foodData); //Call onAddSnack with the new snack data
+              
+            } else if (type === "drinks"){
+              await SnackOrBoozeApi.addDrink(foodData);
+              onAddDrink(foodData); //Call onAddDrink with the new drink data
+             
+            }
+           
             setMessage(`${foodData.type} added successully!`);
+
+            console.log("Updated drinks state:", foodData);
 
             //Clear form fields and reset type to Food
             setFoodData({
-                type: "Food",
+                type: type,
                 name: "",
                 description: "",
                 recipe: "",
@@ -47,6 +70,8 @@ function AddFoodForm(type) {
             setMessage(`Error adding ${foodData.type.toLowerCase()}`);
         }
 };
+
+console.log("FoodData in AddFoodForm:", foodData);
 
 return(
     <div>

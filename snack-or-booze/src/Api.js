@@ -21,14 +21,25 @@ class SnackOrBoozeApi {
     return result.data;
   }
 
-  static async addFood(foodData) {
+
+  static async addSnack(snackData) {
     try {
-      const result = await axios.post(`${BASE_API_URL}`, foodData)
+      const result = await axios.post(`${BASE_API_URL}/snacks`, snackData);
       return result.data;
     } catch (error) {
-      throw Error("Error adding food:", error)
+      throw new Error("Error adding snack:", error)
     }
-  } 
+  }
+
+  static async addDrink(drinkData) {
+    try {
+      const result = await axios.post(`${BASE_API_URL}/drinks`, drinkData);
+      return result.data;
+    } catch (error) {
+      throw new Error("Error adding drink:", error)
+    }
+  }
+
 
 }
 
