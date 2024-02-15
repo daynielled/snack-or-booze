@@ -16,7 +16,7 @@ function FoodItem({ items, cantFind }) {
   //Find the snack item by its ID
   let food = items.find(item => item.id === id);
 
-   //If the snack item is not found, redirect to the specified path
+  //If the snack item is not found, redirect to the specified path
   if (!food) return <Redirect to={cantFind} />;
 
   return (

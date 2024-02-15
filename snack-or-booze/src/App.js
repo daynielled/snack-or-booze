@@ -7,7 +7,7 @@ import NavBar from "./NavBar";
 import { Route, Switch } from "react-router-dom";
 import FoodMenu from "./FoodMenu";
 import FoodItem from "./FoodItem";
-import DrinkItem from "./DrinkItem"; 
+import DrinkItem from "./DrinkItem";
 import AddFoodForm from "./AddFoodForm";
 
 
@@ -20,16 +20,16 @@ import AddFoodForm from "./AddFoodForm";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [snacks, setSnacks] = useState([]);
-  const [drinks, setDrinks] = useState([]); 
+  const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
     /**Fetches snack and drinks data from the API and updates the state */
     async function fetchData() {
       try {
         const snacksData = await SnackOrBoozeApi.getSnacks();
-        const drinksData = await SnackOrBoozeApi.getDrinks(); 
+        const drinksData = await SnackOrBoozeApi.getDrinks();
         setSnacks(snacksData);
-        setDrinks(drinksData); 
+        setDrinks(drinksData);
         setIsLoading(false);
         console.log("Fetched drinks:", drinksData);
       } catch (error) {
@@ -40,25 +40,25 @@ function App() {
     fetchData();
   }, []);
 
-// Function to add a new snack
-const addSnack = async (snackData) => {
-  try {
-    const newSnack = await SnackOrBoozeApi.addSnack(snackData);
-    setSnacks([...snacks, newSnack]); // Add the new snack to the existing list
-  } catch (error) {
-    console.error("Error adding snack:", error);
-  }
-};
+  // Function to add a new snack
+  const addSnack = async (snackData) => {
+    try {
+      const newSnack = await SnackOrBoozeApi.addSnack(snackData);
+      setSnacks([...snacks, newSnack]); // Add the new snack to the existing list
+    } catch (error) {
+      console.error("Error adding snack:", error);
+    }
+  };
 
-// Function to add a new drink
-const addDrink = async (drinkData) => {
-  try {
-    const newDrink = await SnackOrBoozeApi.addDrink(drinkData);
-    setDrinks([...drinks, newDrink]); // Add the new drink to the existing list
-  } catch (error) {
-    console.error("Error adding drink:", error);
-  }
-};
+  // Function to add a new drink
+  const addDrink = async (drinkData) => {
+    try {
+      const newDrink = await SnackOrBoozeApi.addDrink(drinkData);
+      setDrinks([...drinks, newDrink]); // Add the new drink to the existing list
+    } catch (error) {
+      console.error("Error adding drink:", error);
+    }
+  };
 
 
   if (isLoading) {
@@ -93,11 +93,10 @@ const addDrink = async (drinkData) => {
             </Route>
 
             <Route path="/add-food/:type" render={(routeProps) => {
-              console.log(routeProps);
               return <AddFoodForm onAddSnack={addSnack} onAddDrink={addDrink} type={routeProps.match.params.type} />
             }}>
             </Route>
-          
+
             <Route>
               <p>Hmmm. I can't seem to find what you want.</p>
             </Route>

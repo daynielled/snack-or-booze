@@ -35,7 +35,7 @@ function FoodMenu({ items, type }) {
     }
   };
 
-  console.log("Items recieved in FoodMenu:", items);
+
 
   return (
     <section className="col-md-4">
